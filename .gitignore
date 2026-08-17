@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment variables
+.env
+*.env
+server/.env
+
+# Build outputs
+client/dist/
+dist/
+
+# Uploads & Temporary files
+server/uploads/*
+!server/uploads/.gitkeep
+*.log
+.DS_Store
+Thumbs.db
