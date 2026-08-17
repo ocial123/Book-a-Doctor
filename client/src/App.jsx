@@ -7,23 +7,24 @@ import UserHome from './components/UserHome';
 import AdminHome from './components/AdminHome';
 
 export default function App() {
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [userData, setUserData] = useState(() => {
     const saved = localStorage.getItem('userData');
     return saved ? JSON.parse(saved) : null;
   });
 
   const handleLogin = (user) => {
+    const curToken = localStorage.getItem('token');
+    setToken(curToken);
     setUserData(user);
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
+    setToken(null);
     setUserData(null);
-    window.location.href = '/login';
   };
-
-  const token = localStorage.getItem('token');
 
   return (
     <BrowserRouter>
@@ -36,7 +37,7 @@ export default function App() {
         <Route
           path="/userhome"
           element={
-            token ? (
+            token || localStorage.getItem('token') ? (
               <UserHome userdata={userData} onLogout={handleLogout} />
             ) : (
               <Navigate to="/login" replace />
@@ -48,13 +49,14 @@ export default function App() {
         <Route
           path="/adminhome"
           element={
-            token ? (
+            token || localStorage.getItem('token') ? (
               <AdminHome userdata={userData} onLogout={handleLogout} />
             ) : (
               <Navigate to="/login" replace />
             )
           }
         />
+
 
         {/* Legacy PDF Route Aliases */}
         <Route path="/user/appointments" element={<Navigate to="/userhome" replace />} />

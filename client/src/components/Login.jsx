@@ -34,8 +34,7 @@ export default function Login({ onLogin }) {
         const isLoggedUser = res.data.userData;
         const targetPath = isLoggedUser.type === 'admin' ? '/adminhome' : '/userhome';
         
-        // Force navigate to ensure fresh auth state
-        window.location.href = targetPath;
+        navigate(targetPath, { replace: true });
       } else {
         setError(res.data.message || 'Login failed. Please verify your credentials.');
       }
