@@ -30,10 +30,16 @@ app.use(express.json());
 app.use(cors());
 app.use("/uploads", express.static(uploadsDir));
 
+// Root route for health check
+app.get("/", (req, res) => {
+  res.status(200).send("Book a Doctor Backend API is up and running!");
+});
+
 // Routes
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/doctor", require("./routes/doctorRoutes"));
+
 
 // Global Error Handler Middleware
 app.use((err, req, res, next) => {
