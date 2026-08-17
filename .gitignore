@@ -15,6 +15,7 @@ dist/
 # Uploads & Temporary files
 server/uploads/*
 !server/uploads/.gitkeep
+*.pdf
 *.log
 .DS_Store
 Thumbs.db
